@@ -15,7 +15,7 @@ router.get('/seed', async (req, res) => {
       [
         {
             name: 'walk dog',
-            done: true
+            done: false
         }
       ]
     try {
