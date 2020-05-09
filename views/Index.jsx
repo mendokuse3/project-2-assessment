@@ -1,4 +1,5 @@
 const React = require('react');
+const Default = require('./Default');
 
 class Index extends React.Component{
     render(){
@@ -10,18 +11,30 @@ class Index extends React.Component{
             list = toDos.map(item => {
                 let done;
                 item.done === true ? done = 'done' : done = "not done"
-                return <li>{item.name}: {done}</li>;
+                return (
+                <li>{item.name}: {done}
+                <form action={`/?_method=DELETE`} method='POST'>
+                    <input type="submit" name={item._id} value='DELETE'/>
+                </form>
+                </li>
+                )
             })
         }
         return (
-            <>
+            <Default>
                 <div>
                     <h1>To Do List</h1>
+                    <ul>
                     {list}
+                    </ul>
                     <hr/>
-                    {/* <form action=""></form> */}
+                    <form action="/" method="POST">
+                        <input type="text" name='name' required/>
+                        Done: <input type="checkbox" name='done'/>
+                        <input type="submit" value='ADD TO DO'/>
+                    </form>
                 </div>
-            </>
+            </Default>
         )
     }
 }

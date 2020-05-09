@@ -26,4 +26,22 @@ router.get('/seed', async (req, res) => {
     }
 })
 
+router.post('/', (req, res) => {
+    console.log(req.body)
+    if (req.body.done === 'on'){
+        req.body.done = true;
+    } else {
+        req.body.done = false;
+    }
+    ToDos.create(req.body, (err, createdToDo) => {
+        res.redirect('/')
+    })
+})
+
+router.delete('/', (req, res) => {
+    ToDos.findByIdAndDelete(Object.keys(req.body)[0], (err, deletedToDo) => {
+        res.redirect('/')
+    })
+})
+
 module.exports = router;
